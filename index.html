@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image License Embedder</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/piexifjs/1.0.4/piexif.min.js"></script>
+</head>
+<body>
+    <div class="container">
+        <h1>Upload an Image</h1>
+        <form id="upload-form">
+            <div class="dropbox" onclick="document.getElementById('file-input').click()">
+                <input type="file" id="file-input" accept="image/*">
+                <p>Drop your image here, or click to select</p>
+            </div>
+            <div id="license-section" style="display: none;">
+                <label for="license">Select License:</label>
+                <select id="license" onchange="loadLicenseText()">
+                    <option value="CC BY">CC BY (Attribution)</option>
+                    <option value="CC BY-SA">CC BY-SA (Attribution-ShareAlike)</option>
+                    <option value="CC BY-ND">CC BY-ND (Attribution-NoDerivs)</option>
+                    <option value="CC BY-NC">CC BY-NC (Attribution-NonCommercial)</option>
+                    <option value="CC BY-NC-SA">CC BY-NC-SA (Attribution-NonCommercial-ShareAlike)</option>
+                    <option value="CC BY-NC-ND">CC BY-NC-ND (Attribution-NonCommercial-NoDerivs)</option>
+                    <option value="CC0">CC0 (Public Domain Dedication)</option>
+                    <option value="custom">Custom</option>
+                </select>
+                <textarea id="license_text" rows="4"></textarea>
+                <input type="file" id="custom-license-file" style="display: none;" accept=".txt" onchange="loadCustomLicense()">
+                <label for="watermark">
+                    <input type="checkbox" id="watermark">
+                    Add license as watermark on the image
+                </label>
+                <label for="format">Select Image Format:</label>
+                <select id="format">
+                    <option value="jpeg">JPEG</option>
+                    <option value="png">PNG</option>
+                    <option value="webp">WEBP</option>
+                </select>
+            </div>
+            <button type="button" id="download-button" style="display: none;" onclick="processImage()">Download Licensed Image</button>
+        </form>
+        <canvas id="canvas" style="display: none;"></canvas>
+    </div>
+    <div id="notification" class="notification"></div>
+    <script src="js/scripts.js"></script>
+</body>
+</html>
